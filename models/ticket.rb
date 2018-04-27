@@ -20,4 +20,16 @@ class Ticket
     @id = ticket['id'].to_i
   end
 
+# Class variables
+  def self.map_items(ticket_data)
+    result = ticket_data.map { |ticket| Ticket.new(ticket) }
+    return result
+  end
+
+  def self.all()
+    sql = "SELECT * FROM tickets"
+    ticket_data = SqlRunner.run(sql)
+    return Ticket.map_items(ticket_data)
+  end
+
 end
